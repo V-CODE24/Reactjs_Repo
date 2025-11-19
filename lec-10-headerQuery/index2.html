@@ -1,0 +1,30 @@
+<!-- axios is like  easy syntax for fetch which runs the background requests and 
+ its basically a client and express is server-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <head>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.6/axios.min.js"></script>
+    </head>
+</head>
+<body>
+  LinkedIn
+  <div id="posts"></div>
+  <button onclick="getRecentPost()">fetch latest posts</button>
+</body>
+<script>
+    async function getRecentPost(){
+        const response = await axios.get("https://jsonplaceholder.typicode.com/posts")//ye data ekdum to nahi ayeaga server se so "ye await hoga"
+     const arr = response.data;
+     for(let i = 0 ; i<arr.length ; i++){//it will iterate to whole array of objects which is in this Dummy website
+       document.getElementById("posts").innerHTML +=("<div>" + arr[i].title + "</div>");
+      }
+    }
+       
+   
+</script>
+</html>
