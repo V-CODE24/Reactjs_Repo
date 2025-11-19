@@ -1,0 +1,54 @@
+<body>
+  <input type="text"></input>
+  <button onclick="addTodo()">Add todo!</button>
+  <button onclick="deleteLastTodo()">Delete last Todo</button>
+  <button onclick="deleteFirstTodo()">Delete first Todo</button>
+  <div id="todos"></div>
+  <script>
+    let todos = [];//this state variable will get updated or we have to
+    
+function addTodo(){
+    todos.push( {
+        title : document.querySelector("input").value
+    })
+    render();
+}
+
+function  deleteLastTodo(){
+// todos.splice(todos.length - 1,1)//we went to delete one element from the last of array
+todos.pop();// from the zeroth position delete one element
+render();
+}
+
+function deleteFirstTodo(){
+todos.splice(0,1);// from the zeroth position delete one element
+render()
+}
+
+function deleteTodoAt(index){
+todos.splice(index,1); // it says iss index se ek element hta do
+//or we can say whatever is present at this index remove it
+render();
+}
+    function createTodoComponent(todo,index){//given a todo element this is how you make div
+const div  =  document.createElement("div");
+const h1  =  document.createElement("h1");
+const button  =  document.createElement("button");
+button.innerHTML = "button";
+button.setAttribute("onclick","deleteTodoAt(" + index + ")");
+h1.innerHTML = todo.title;
+div.append(h1);
+div.append(button);
+return div
+    }
+
+    //react
+function render(){
+document.querySelector("#todos").innerHTML = "";//first we cleared the todos then populated it further
+for(let i =0;i<todos.length;i++){// if 5 todos then it will get called gettodoComponent 5 times
+const element = createTodoComponent(todos[i],i);// har ek todo component ka apna index hoga
+document.querySelector("#todos").appendChild(element);
+}
+}
+  </script>
+</body>
